@@ -13,8 +13,14 @@
   min-height: 100vh;
 }
 
+::-webkit-scrollbar{
+  display:none;
+}
+
 .main{
   flex: 1;
+  width:90vw;
+  margin:0 auto;
 }
 
 li {

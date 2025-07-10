@@ -5,6 +5,7 @@
   padding: 15px 50px;
   font-size: 18px;
   position: relative;
+  margin-bottom:20px;
 }
 
 .navbar-left {
@@ -33,6 +34,7 @@
 .navlinks {
   display: flex;
   gap: 40px;
+  font-size:20px;
 }
 
 .navlinks .active {
@@ -63,6 +65,7 @@
 @media (max-width: 992px) {
   .navlinks {
     gap: 20px;
+    font-size:19px;
   }
 
   .navbar-right {
