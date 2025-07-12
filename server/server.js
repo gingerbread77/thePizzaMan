@@ -4,6 +4,7 @@ const connectDB = require('./database/db')
 const cors = require('cors')
 const path = require('path')
 const foodRoutes = require('./routes/foodRoutes')
+const userRoutes = require('./routes/userRoutes')
 
 const app = express()
 
@@ -21,6 +22,7 @@ app.use('/uploads',express.static(path.join(__dirname,'uploads')))
 
 // api endpoints
 app.use('/api/foods',foodRoutes)
+app.use('/api/users',userRoutes)
 
 app.get('/',(req,res)=>{
   res.send('test');

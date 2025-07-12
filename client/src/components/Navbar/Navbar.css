@@ -47,7 +47,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 70px;
+  gap: 50px;
 }
 
 .navbar-right button {
@@ -60,6 +60,40 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+
+.profile {
+  position: relative;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  display: none;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  min-width: 140px;
+}
+
+.profile-dropdown li {
+  padding: 10px 16px;
+  color: #333;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.profile-dropdown li:hover {
+  background-color: #f2f2f2;
+}
+
+.profile:hover .profile-dropdown {
+  display: block;
 }
 
 @media (max-width: 992px) {

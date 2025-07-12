@@ -1,8 +1,8 @@
-const FoodModel = require('../models/FoodModel')
+const foodModel = require('../models/foodModel')
 
 const getAllFood = async (req,res) => {
   try {
-    const foods = await FoodModel.find()
+    const foods = await foodModel.find()
     res.status(200).json(foods)
   } catch (err){
     console.error(err);
