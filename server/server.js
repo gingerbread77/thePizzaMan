@@ -5,6 +5,7 @@ const cors = require('cors')
 const path = require('path')
 const foodRoutes = require('./routes/foodRoutes')
 const userRoutes = require('./routes/userRoutes')
+const cartRoutes = require('./routes/cartRoutes')
 
 const app = express()
 
@@ -23,6 +24,7 @@ app.use('/uploads',express.static(path.join(__dirname,'uploads')))
 // api endpoints
 app.use('/api/foods',foodRoutes)
 app.use('/api/users',userRoutes)
+app.use('/api/cart',cartRoutes)
 
 app.get('/',(req,res)=>{
   res.send('test');

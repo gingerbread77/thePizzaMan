@@ -1,30 +1,16 @@
 import './Menu.css'
 import { category_list } from '../../assets/assets'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import axios from 'axios'
 import { baseUrl } from '../../config'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { CartContext } from '../../context/CartContext'
 
 const Menu = () => {
+  const { foodList } = useContext(CartContext);
   // category default as 'All'
   const [ category,setCategory ] = useState('All');
-  const [ menu,setMenu ] = useState([]);
-  // fetch menu
-  const fetchMenu = async () => {
-    try {
-      const res = await axios.get(`${baseUrl}/api/foods/`);
-      console.log(baseUrl)
-      setMenu(res.data);
-      console.log(res.data);
-    } catch (err){
-      console.error('Failed to load menu',err);
-    }
-  }
-
-  useEffect(()=>{
-    fetchMenu();
-  },[])
   
   return (
     <div className="menu">
@@ -38,7 +24,7 @@ const Menu = () => {
         ))}
       </div>
       <div className="menu-list">
-        {menu.filter(food => category === 'All' || food.category ===  category).map(food=>(
+        {foodList.filter(food => category === 'All' || food.category ===  category).map(food=>(
           <div key={food._id} className="product-card">
             <Link to={`/menu/${food._id}`}><img className="food-img" src={`${baseUrl}${food.image}`} alt={food.title} /></Link>
             <p>{food.name}</p>

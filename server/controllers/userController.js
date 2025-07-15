@@ -1,4 +1,4 @@
-const userModel = require('../models/userModel')
+const userModel = require('../models/UserModel')
 const validator = require('validator')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
@@ -12,18 +12,12 @@ const registerUser = async (req, res) => {
   try {
     const exist = await userModel.findOne({email})
 
-    if(exist){
-      return res.json({success:false,msg:"Email is taken, please use another one"})
-    }
+    if(exist) return res.status(400).json({success:false,msg:"Email is taken, please use another one"})
 
     // validate email format
-    if(!validator.isEmail(email)){
-      return res.json({success:false,msg:"Please enter a valid email"})
-    }
+    if(!validator.isEmail(email)) return res.status(400).json({success:false,msg:"Please enter a valid email"})
 
-    if(password.length < 8){
-      return res.json({success:false,msg:"The password must be at least 8 character."})
-    }
+    if(password.length < 8) return res.status(400).json({success:false,msg:"The password must be at least 8 character."})
 
     // hash the password
     const salt = await bcrypt.genSalt(10)
@@ -35,11 +29,11 @@ const registerUser = async (req, res) => {
     })
 
     const user = await newUser.save()
-    res.json({success:true,user:{_id:user._id,email:user.email}})
+    return res.json({success:true,user:{_id:user._id,email:user.email}})
 
   } catch (err){
     console.error(err);
-    return res.json({success:false,msg:"Error"})
+    return res.status(500).json({success:false,msg:"Error"})
   }
 }
 
@@ -49,22 +43,18 @@ const loginUser = async(req,res)=> {
   try {
     const user = await userModel.findOne({email})
     
-    if(!user){
-      return res.json({success:false,msg:"Incorrect username or password"})
-    }
+    if(!user) return res.status(400).json({success:false,msg:"Incorrect username or password"})
 
     const isMatch = await bcrypt.compare(password,user.password)
 
-    if(!isMatch){
-      return res.json({success:false,msg:"incorrect username or password"})
-    }
+    if(!isMatch) return res.status(400).json({success:false,msg:"incorrect username or password"})
 
     const token = createToken(user._id)
-    return res.json({success:true,token,user:{_id:user._id,email:user.email}})
+    return res.status(200).json({success:true,token,user:{_id:user._id,email:user.email}})
 
   } catch(err){
     console.error(err)
-    res.json({success:false,msg:err})
+    return res.status(500).json({success:false,msg:err})
   }
 }
 

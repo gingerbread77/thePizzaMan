@@ -60,14 +60,15 @@ const Login = () => {
           setPage('login');
         } else {
           setError(res.data.msg);
-          console.log(error)
+          console.log(res.data.msg);
         }
       } else if (page === 'login') {
         const res = await axios.post(`${baseUrl}/api/users/login`, { email, password });
         if (res.data.success) {
           login({
             token: res.data.token,
-            email: res.data.user.email
+            email: res.data.user.email,
+            userId:res.data.user._id
           });
           setError('');
           clearFormData();
@@ -89,6 +90,7 @@ const Login = () => {
             placeholder="Email"
             name="email"
             value={formData.email}
+            required
             onChange={handleChange}
           />
           <input
@@ -96,6 +98,7 @@ const Login = () => {
             placeholder="Password"
             name="password"
             value={formData.password}
+            required
             onChange={handleChange}
           />
           {page === 'register' && <input
@@ -103,6 +106,7 @@ const Login = () => {
             placeholder="Confirm Password"
             name="confirmPassword"
             value={formData.confirmPassword}
+            required
             onChange={handleChange}
           />}
           {error && <p className="error">{error}</p>}

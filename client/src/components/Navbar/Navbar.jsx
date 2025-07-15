@@ -4,11 +4,14 @@ import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { FaShoppingCart, FaBars, FaTimes } from "react-icons/fa"
 import { FaUserCircle } from 'react-icons/fa'
 import { AuthContext } from '../../context/AuthContext'
+import { CartContext } from '../../context/CartContext'
 
 const Navbar = () => {
   const { role, token, logout } = useContext(AuthContext);
   const [showMenuDropDown, setShowMenuDropDown] = useState(false);
   const navigate = useNavigate();
+  const { cartItems } = useContext(CartContext);
+  const totalItemsInCart = Object.values(cartItems).reduce((sum, qty) => sum + qty, 0);
 
   const toLoginPage = () => {
     navigate('/login');
@@ -27,7 +30,7 @@ const Navbar = () => {
           <Icon size={24} onClick={toggleMenuDropDown}></Icon>
         </button>
         <Link className="header" to="/">
-          <img className="logo" src="./logo.png" alt="logo" />
+          <img className="logo" src="/logo.png" alt="logo" />
           <h2>ThePizzaMan</h2>
         </Link>
       </div>
@@ -44,12 +47,18 @@ const Navbar = () => {
       <div className="navbar-right">
         <div className="cart">
           <Link to="/cart">
-            <FaShoppingCart size={24} />
+            <FaShoppingCart className="icon" size={24} />
+            {totalItemsInCart > 0 && (
+              <div className="cart-quantity-container">{totalItemsInCart}</div>
+            )}
           </Link>
         </div>
         {token ? <div className="profile">
-          <FaUserCircle size={24} />
+          <FaUserCircle size={24} className="icon"/>
           <ul className="profile-dropdown">
+            {role === 'user' && (
+              <li onClick={()=>navigate('/my-orders')}>My Orders</li>
+            )} 
             <li className="logout" onClick={() => {
               logout();
               navigate('/');

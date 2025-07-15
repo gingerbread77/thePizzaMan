@@ -4,4 +4,5 @@ const foodRouter = express.Router()
 const { getAllFood } = require('../controllers/foodController')
 
 foodRouter.get('/',getAllFood)
+
 module.exports = foodRouter
