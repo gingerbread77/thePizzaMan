@@ -11,7 +11,7 @@ const addToCart = async (req, res) => {
     if (!user) return res.status(400).json({ success: false, msg: "User not found" })
 
     const cartData = user.cartData || {}
-    cartData[itemId] = (cartData[itemId] || 0) + quantity
+    cartData[itemId] = (cartData[itemId] || 0) + 1
     await userModel.findByIdAndUpdate(userId, { cartData })
     return res.status(200).json({ success: true,cartData, msg: "Added to cart" })
   } catch (err) {
@@ -49,6 +49,7 @@ const clearCart = async (req, res) => {
   if (!userId) return res.status(400).json({ success: false, msg: "User does not exist" })
   try {
     await userModel.findByIdAndUpdate(userId, { cartData: {} })
+    return res.status(200).json({success:true,cartData:{}})
   } catch (err) {
     console.error(err)
     return res.status(500).json({ success: false, msg: "Error" })

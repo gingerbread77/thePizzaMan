@@ -3,17 +3,19 @@ import { CartContext } from "../../context/CartContext";
 import { baseUrl } from '../../config';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import { toast } from "react-toastify";
-
 import './Cart.css';
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
+
+  const navigate = useNavigate();
   const {
     cartItems,
     increaseItemQty,
     decreaseItemQty,
     clearCart,
     addItemToCart,
-    removeFromCart,
+    subtotal,
     foodList,
   } = useContext(CartContext);
 
@@ -21,11 +23,15 @@ const Cart = () => {
 
   const isEmptyCart = Object.keys(cartItems).length === 0;
 
-  const subtotal = Object.entries(cartItems).reduce((total, [id, qty]) => {
-    const item = foodList.find(f => f._id === id);
-    if (!item) return total;
-    return total + item.price * qty;
-  }, 0);
+  const handleClearCart = async () => {
+    try {
+      await clearCart();
+      toast.success('Cart cleared');
+    } catch (err) {
+      toast.error('Failed to clear cart');
+    }
+  }
+
 
   const handleDecrease = (id) => {
     if (cartItems[id] === 1) {
@@ -71,7 +77,6 @@ const Cart = () => {
                   <div className="quantity-control">
                     <button className="minus-btn" onClick={() => {
                       handleDecrease(id);
-                      removeFromCart(id);
                     }}>
                       <FaMinus />
                     </button>
@@ -79,7 +84,7 @@ const Cart = () => {
                     <button className="plus-btn" onClick={() => {
                       increaseItemQty(id);
                       addItemToCart(id)
-                      }}>
+                    }}>
                       <FaPlus />
                     </button>
                   </div>
@@ -90,12 +95,18 @@ const Cart = () => {
             })}
           </div>
 
-          <button onClick={clearCart} className="clear-btn">Clear Cart</button>
-
-          <div className="cart-subtotal">
-            <h3>Subtotal:</h3>
-            <p>${subtotal.toFixed(2)}</p>
+          <div className="cart-footer">
+            <div className="cart-subtotal">
+              <h3>Subtotal:</h3>
+              <p>${subtotal.toFixed(2)}</p>
+            </div>
+            <div className="cart-actions">
+              <button onClick={handleClearCart} className="clear-btn">Clear Cart</button>
+              <button className="checkout-btn" onClick={() => navigate('/checkout')}>Checkout</button>
+            </div>
           </div>
+
+
         </div>
       )}
 

@@ -18,15 +18,19 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.cart-header {
+.cart-header,
+.cart-item {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 20px;
+  text-align: center;
+}
+
+.cart-header {
   padding-bottom: 15px;
   border-bottom: 2px solid #ddd;
   font-weight: 600;
   margin-bottom: 20px;
-  text-align: center;
 }
 
 .cart-items {
@@ -36,13 +40,9 @@
 }
 
 .cart-item {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
   align-items: center;
-  gap: 20px;
   border-bottom: 1px solid #eee;
   padding-bottom: 10px;
-  text-align: center;
 }
 
 .cart-product {
@@ -109,33 +109,54 @@
   font-weight: 500;
 }
 
-.cart-subtotal {
+.cart-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.3rem;
-  font-weight: 600;
+  flex-wrap: wrap;
+  gap: 1rem;
   margin-top: 30px;
-  padding: 20px 0;
+  padding-top: 20px;
   border-top: 2px solid #eee;
 }
 
-.clear-btn {
-  margin-top: 20px;
-  background-color: #ff4d4f;
-  color: #fff;
+.cart-subtotal {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.cart-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.clear-btn,
+.checkout-btn {
   border: none;
-  padding: 14px 0;
+  padding: 12px 24px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 700;
-  font-size: 1.1rem;
-  width: 100%;
+  font-size: 1rem;
   transition: background-color 0.3s ease;
+}
+
+.clear-btn {
+  background-color: #ff4d4f;
+  color: #fff;
 }
 
 .clear-btn:hover {
   background-color: #d9363e;
+}
+
+.checkout-btn {
+  background-color: rgba(10, 186, 10, 0.85);
+  color: #fff;
+}
+
+.checkout-btn:hover {
+  background-color: rgba(10, 186, 10, 1);
 }
 
 .modal-overlay {
@@ -171,28 +192,27 @@
   gap: 15px;
 }
 
-.modal-confirm {
-  background-color: #ff4d4f;
-  color: white;
+.modal-confirm,
+.modal-cancel {
   border: none;
   padding: 8px 18px;
   border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
+}
+
+.modal-confirm {
+  background-color: #ff4d4f;
+  color: white;
+}
+
+.modal-confirm:hover {
+  background-color: #d9363e;
 }
 
 .modal-cancel {
   background-color: #ccc;
   color: #333;
-  border: none;
-  padding: 8px 18px;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.modal-confirm:hover {
-  background-color: #d9363e;
 }
 
 .modal-cancel:hover {

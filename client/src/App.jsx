@@ -7,6 +7,9 @@ import Menu from './pages/Menu/Menu'
 import ProductInfo from './pages/ProductInfo/ProductInfo'
 import Login from './pages/Login/Login'
 import Cart from './pages/Cart/Cart'
+import Checkout from './pages/Checkout/Checkout'
+import OrderSuccess from './pages/OrderSuccess/OrderSuccess'
+import MyOrders from './pages/MyOrder/MyOrders'
 
 const App = () => {
   return (
@@ -19,10 +22,13 @@ const App = () => {
           <Route path="/menu/:id" element={<ProductInfo />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/orders/success/:id" element={<OrderSuccess />} />
+          <Route path="/my-orders" element={<MyOrders />} />
         </Routes>
       </div>
       <Footer />
-      <ToastContainer position="top-right" autoClose={2000}/>
+      <ToastContainer position="top-right" autoClose={2000} />
     </div>
   )
 }

@@ -6,6 +6,7 @@ const path = require('path')
 const foodRoutes = require('./routes/foodRoutes')
 const userRoutes = require('./routes/userRoutes')
 const cartRoutes = require('./routes/cartRoutes')
+const orderRoutes = require('./routes/orderRoutes')
 
 const app = express()
 
@@ -25,6 +26,7 @@ app.use('/uploads',express.static(path.join(__dirname,'uploads')))
 app.use('/api/foods',foodRoutes)
 app.use('/api/users',userRoutes)
 app.use('/api/cart',cartRoutes)
+app.use('/api/orders',orderRoutes)
 
 app.get('/',(req,res)=>{
   res.send('test');

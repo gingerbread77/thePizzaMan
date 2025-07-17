@@ -41,7 +41,7 @@ const Navbar = () => {
             <li><NavLink to="/admin/orders" onClick={() => setMenuOpen(false)}>Manage Orders</NavLink></li></> :
           <>
             <li><NavLink to="/menu" onClick={() => setShowMenuDropDown(false)}>Menu</NavLink></li>
-            <li><NavLink to="/orders" onClick={() => setShowMenuDropDown(false)}>My Orders</NavLink></li>
+            <li><NavLink to="/my-orders" onClick={() => setShowMenuDropDown(false)}>My Orders</NavLink></li>
           </>}
       </ul>
       <div className="navbar-right">

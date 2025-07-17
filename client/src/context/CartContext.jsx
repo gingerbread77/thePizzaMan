@@ -10,6 +10,12 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState({});
   const { token, user } = useContext(AuthContext);
 
+  const subtotal = Object.entries(cartItems).reduce((total, [id, qty]) => {
+    const item = foodList.find(f => f._id === id);
+    if (!item) return total;
+    return total + item.price * qty;
+  }, 0);
+
   const fetchFoodList = async () => {
     try {
       const res = await axios.get(`${baseUrl}/api/foods`);
@@ -21,7 +27,7 @@ export const CartProvider = ({ children }) => {
 
   const fetchCart = async () => {
     if (!token || !user?._id) {
-      console.log('No token or userId, skip fetchCart');
+      console.log('No token or userId');
       return;
     }
 
@@ -75,7 +81,7 @@ export const CartProvider = ({ children }) => {
   };
 
 
-  const addItemToCart = async (itemId,quantity = 1) => {
+  const addItemToCart = async (itemId, quantity = 1) => {
     if (!token) return;
 
     try {
@@ -96,19 +102,18 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const clearCart = async () => {
-    setCartItems({});
-    try {
-      const res = await axios.post(`${baseUrl}/api/cart/clear`, {
-        userId: user._id
-      });
-      if (!res.data.success) {
-        console.log('Failed to clear cart');
-      }
-    } catch (err) {
-      console.error(err);
+const clearCart = async () => {
+  try {
+    const res = await axios.post(`${baseUrl}/api/cart/clear`, { userId: user._id });
+    if (res.data.success) { 
+      setCartItems(res.data.cartData || {});
+    } else {
+      console.warn('Failed to clear cart on server');
     }
-  };
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   useEffect(() => {
     if (token && user?._id) {
@@ -128,7 +133,9 @@ export const CartProvider = ({ children }) => {
       addItemToCart,
       increaseItemQty,
       decreaseItemQty,
-      clearCart
+      setCartItems,
+      subtotal,
+      clearCart,
     }}>
       {children}
     </CartContext.Provider>

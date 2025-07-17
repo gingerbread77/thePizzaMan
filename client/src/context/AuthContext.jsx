@@ -5,13 +5,14 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [role, setRole] = useState("guest");
   const [token, setToken] = useState(null);
-  const [user,setUser] = useState(null);
+  const [user, setUser] = useState(null);
 
-  const login = ({ token, email,userId }) => {
+  const login = ({ token, email, userId }) => {
     setToken(token);
-    setUser({email,_id:userId});
+    const userData = { email, _id: userId };
+    setUser(userData);
     localStorage.setItem('token', token);
-    localStorage.setItem('user',JSON.stringify({email,_id:userId}));
+    localStorage.setItem('user', JSON.stringify(userData));
 
     const userRole = email === "admin@thepizzaman.com" ? "admin" : "user";
     setRole(userRole);
@@ -27,18 +28,19 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const savedToken = localStorage.getItem('token');
-    const savedUser = localStorage.getItem('user');
+    const savedUserStr = localStorage.getItem('user');
 
-    if (savedToken && savedUser) {
+    if (savedToken && savedUserStr) {
+      const parsedUser = JSON.parse(savedUserStr);
       setToken(savedToken);
-      setUser(JSON.parse(savedUser));
-      const userRole = JSON.parse(savedUser).email === "admin@thepizzaman.com" ? "admin" : "user";
+      setUser(parsedUser);
+      const userRole = parsedUser.email === "admin@thepizzaman.com" ? "admin" : "user";
       setRole(userRole);
     }
   }, []);
 
   return (
-    <AuthContext.Provider value={{ role, token, user,login, logout }}>
+    <AuthContext.Provider value={{ role, token, user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
