@@ -129,6 +129,7 @@ const clearCart = async () => {
     <CartContext.Provider value={{
       cartItems,
       foodList,
+      fetchFoodList,
       fetchCart,
       addItemToCart,
       increaseItemQty,

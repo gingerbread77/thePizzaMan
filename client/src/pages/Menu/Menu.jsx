@@ -1,9 +1,7 @@
 import './Menu.css'
 import { category_list } from '../../assets/assets'
 import { useState, useContext } from 'react'
-import axios from 'axios'
 import { baseUrl } from '../../config'
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { CartContext } from '../../context/CartContext'
 

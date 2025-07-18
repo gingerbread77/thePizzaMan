@@ -46,19 +46,20 @@ const Navbar = () => {
       </ul>
       <div className="navbar-right">
         <div className="cart">
-          <Link to="/cart">
-            <FaShoppingCart className="icon" size={24} />
-            {totalItemsInCart > 0 && (
-              <div className="cart-quantity-container">{totalItemsInCart}</div>
-            )}
-          </Link>
+          {role === 'admin' ? "" :
+            <Link to="/cart">
+              <FaShoppingCart className="icon" size={24} />
+              {totalItemsInCart > 0 && (
+                <div className="cart-quantity-container">{totalItemsInCart}</div>
+              )}
+            </Link>}
         </div>
         {token ? <div className="profile">
-          <FaUserCircle size={24} className="icon"/>
+          <FaUserCircle size={24} className="icon" />
           <ul className="profile-dropdown">
             {role === 'user' && (
-              <li onClick={()=>navigate('/my-orders')}>My Orders</li>
-            )} 
+              <li onClick={() => navigate('/my-orders')}>My Orders</li>
+            )}
             <li className="logout" onClick={() => {
               logout();
               navigate('/');
