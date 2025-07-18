@@ -1,4 +1,4 @@
-const userModel = require('../models/UserModel')
+const UserModel = require('../models/UserModel')
 const validator = require('validator')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
@@ -10,7 +10,7 @@ const createToken = (id) => {
 const registerUser = async (req, res) => {
   const { email, password } = req.body
   try {
-    const exist = await userModel.findOne({email})
+    const exist = await UserModel.findOne({email})
 
     if(exist) return res.status(400).json({success:false,msg:"Email is taken, please use another one"})
 
@@ -23,7 +23,7 @@ const registerUser = async (req, res) => {
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(password,salt)
 
-    const newUser = new userModel({
+    const newUser = new UserModel({
       email,
       password:hashedPassword
     })
@@ -41,7 +41,7 @@ const loginUser = async(req,res)=> {
   const { email,password } = req.body;
 
   try {
-    const user = await userModel.findOne({email})
+    const user = await UserModel.findOne({email})
     
     if(!user) return res.status(400).json({success:false,msg:"Incorrect username or password"})
 

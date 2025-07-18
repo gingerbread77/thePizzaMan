@@ -1,4 +1,4 @@
-const foodModel = require('../models/FoodModel')
+const FoodModel = require('../models/FoodModel')
 const fs = require('fs')
 const path = require('path')
 
@@ -11,7 +11,7 @@ const createFood = async (req,res) => {
     }
 
     // create model before upload image
-    const food = new foodModel({
+    const food = new FoodModel({
       name,
       price,
       category,

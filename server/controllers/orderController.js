@@ -1,5 +1,5 @@
-const orderModel = require('../models/orderModel')
-const userModel = require('../models/UserModel')
+const OrderModel = require('../models/orderModel')
+const UserModel = require('../models/UserModel')
 const Stripe = require('stripe')
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
@@ -11,7 +11,7 @@ const getMyOrders = async (req, res) => {
     return res.status(400).json({ success: false, msg: "User does not exist" })
   }
   try {
-    const orders = await orderModel.find({ userId }).sort({ date: -1 })
+    const orders = await OrderModel.find({ userId }).sort({ date: -1 })
     return res.status(200).json({ success: true, orders })
 
   } catch (err) {
@@ -23,8 +23,8 @@ const getMyOrders = async (req, res) => {
 const placeOrder = async (req, res) => {
   const { userId, items, totalPrice, address, paymentMethod } = req.body;
   try {
-    await orderModel.deleteMany({ userId, paymentStatus: false })
-    const newOrder = new orderModel({
+    await OrderModel.deleteMany({ userId, paymentStatus: false })
+    const newOrder = new OrderModel({
       userId,
       items,
       totalPrice,
@@ -34,7 +34,7 @@ const placeOrder = async (req, res) => {
 
     if (paymentMethod === 'cash') {
       await newOrder.save();
-      await userModel.findByIdAndUpdate(userId, { cartData: {} })
+      await UserModel.findByIdAndUpdate(userId, { cartData: {} })
       return res.status(200).json({ success: true, msg: "Ordered placed" })
     }
 
@@ -66,7 +66,7 @@ const placeOrder = async (req, res) => {
 
 const updatePayment = async (req, res) => {
   try {
-    const updatedOrder = await orderModel.findByIdAndUpdate(req.params.id, { paymentStatus: true }, { new: true })
+    const updatedOrder = await OrderModel.findByIdAndUpdate(req.params.id, { paymentStatus: true }, { new: true })
 
     if (!updatedOrder) {
       return res.status(404).json({ success: false, msg: "Order not found" })
@@ -81,7 +81,7 @@ const updatePayment = async (req, res) => {
 // admin manage orders
 const getAllOrders = async (req,res) => {
   try {
-    const orders = await orderModel.find()
+    const orders = await OrderModel.find()
     res.json({success:true,orders})
   } catch (err){
     console.error(err)
@@ -94,7 +94,7 @@ const updateOrderStatus = async (req, res) => {
   const { foodStatus } = req.body; 
 
   try {
-    const updatedOrder = await orderModel.findByIdAndUpdate(
+    const updatedOrder = await OrderModel.findByIdAndUpdate(
       id,
       { foodStatus },
       { new: true }
