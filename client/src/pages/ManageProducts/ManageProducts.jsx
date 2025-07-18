@@ -8,7 +8,7 @@ import { baseUrl } from '../../config';
 import { FaPlus } from 'react-icons/fa';
 
 const ManageProduct = () => {
-  const { foodList, fetchFoodList } = useContext(CartContext);
+  const {foodList,fetchFoodList} = useContext(CartContext);
   const [showForm, setShowForm] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
 
@@ -21,7 +21,7 @@ const ManageProduct = () => {
   const handleDelete = async (id) => {
     try {
       const res = await axios.delete(`${baseUrl}/api/foods/${id}`);
-      if (res.status.success) {
+      if (res.data.success) {
         toast.success('Product deleted successfully!');
         fetchFoodList();
       }

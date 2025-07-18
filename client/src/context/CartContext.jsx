@@ -8,7 +8,7 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [foodList, setFoodList] = useState([]);
   const [cartItems, setCartItems] = useState({});
-  const { token, user } = useContext(AuthContext);
+  const { token, user,role } = useContext(AuthContext);
 
   const subtotal = Object.entries(cartItems).reduce((total, [id, qty]) => {
     const item = foodList.find(f => f._id === id);
@@ -116,10 +116,12 @@ const clearCart = async () => {
 };
 
   useEffect(() => {
-    if (token && user?._id) {
+    if (token && user?._id && role === 'user') {
       fetchCart();
+    } else {
+      setCartItems({});
     }
-  }, [token, user?._id]);
+  }, [token, user?._id,role]);
 
   useEffect(() => {
     fetchFoodList();

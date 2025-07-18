@@ -81,17 +81,17 @@ const deleteFood = async (req, res) => {
       return res.status(404).json({ msg: "Product not found" });
     }
 
-    const imagePath = path.join(__dirname, 'uploads', path.basename(food.image));
+    const imagePath = path.join(__dirname, '..','uploads', path.basename(food.image));
 
     if (fs.existsSync(imagePath)) {
       fs.unlinkSync(imagePath);
     }
 
     await foodModel.findByIdAndDelete(req.params.id);
-    res.status(200).json({ msg: "Product deleted successfully" });
+    res.status(200).json({ success:true,msg: "Product deleted successfully" });
   } catch (err) {
     console.error('Error', err);
-    res.status(500).json({ msg: 'Error' });
+    res.status(500).json({ success:false,msg: 'Error' });
   }
 }
 
