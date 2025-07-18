@@ -82,8 +82,9 @@ const Cart = () => {
                     </button>
                     <span>{quantity}</span>
                     <button className="plus-btn" onClick={() => {
-                      increaseItemQty(id);
-                      addItemToCart(id)
+                      const newQty = (cartItems[id] || 0) + 1;
+                      increaseItemQty(id, 1);
+                      addItemToCart(id, newQty);
                     }}>
                       <FaPlus />
                     </button>

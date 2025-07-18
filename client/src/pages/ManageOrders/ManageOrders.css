@@ -1,0 +1,115 @@
+.admin-manage-orders {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  color: #333;
+}
+
+.admin-manage-orders h2 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.admin-manage-orders table,
+.admin-manage-orders thead,
+.admin-manage-orders tbody,
+.admin-manage-orders th,
+.admin-manage-orders td,
+.admin-manage-orders tr {
+  display: block;
+}
+
+.admin-manage-orders thead {
+  display: none;
+}
+
+.admin-manage-orders tbody tr {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: #fff7f0;
+  border: 1px solid #ffe0cc;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.admin-manage-orders tbody td {
+  position: relative;
+  padding-left: 50%;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px dashed orange;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.admin-manage-orders tbody td::before {
+  position: absolute;
+  top: 0.5rem;
+  left: 1rem;
+  width: 45%;
+  padding-right: 0.5rem;
+  white-space: nowrap;
+  font-weight: bold;
+  color: orange;
+  content: attr(data-label);
+}
+
+.admin-manage-orders tbody td:last-child {
+  border-bottom: none;
+}
+
+.admin-manage-orders tbody td ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.admin-manage-orders select {
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.4rem;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #333;
+}
+
+.admin-pagination {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.admin-pagination button {
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.admin-pagination button:disabled {
+  background-color: #000;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.admin-pagination button:hover:not(:disabled) {
+  background-color: orange;
+}
+
+@media (max-width: 600px) {
+  .admin-pagination {
+    flex-direction: column;
+  }
+}

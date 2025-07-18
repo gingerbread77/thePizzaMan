@@ -11,7 +11,7 @@ const getMyOrders = async (req, res) => {
     return res.status(400).json({ success: false, msg: "User does not exist" })
   }
   try {
-    const orders = await orderModel.find({userId})
+    const orders = await orderModel.find({ userId }).sort({ date: -1 })
     return res.status(200).json({ success: true, orders })
 
   } catch (err) {
@@ -78,4 +78,36 @@ const updatePayment = async (req, res) => {
   }
 }
 
-module.exports = { getMyOrders, placeOrder,updatePayment }
+// admin manage orders
+const getAllOrders = async (req,res) => {
+  try {
+    const orders = await orderModel.find()
+    res.json({success:true,orders})
+  } catch (err){
+    console.error(err)
+    return res.status(500).json({success:false,msg:"Failed to get orders"})
+  }
+}
+
+const updateOrderStatus = async (req, res) => {
+  const { id } = req.params;
+  const { foodStatus } = req.body; 
+
+  try {
+    const updatedOrder = await orderModel.findByIdAndUpdate(
+      id,
+      { foodStatus },
+      { new: true }
+    );
+
+    if (!updatedOrder) {
+      return res.status(404).json({ success: false, msg: "Order not found" });
+    }
+    return res.json({ success: true, order: updatedOrder });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ success: false, msg: err.message });
+  }
+};
+
+module.exports = { getMyOrders, placeOrder,updatePayment,getAllOrders,updateOrderStatus }

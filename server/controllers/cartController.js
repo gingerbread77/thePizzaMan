@@ -11,7 +11,7 @@ const addToCart = async (req, res) => {
     if (!user) return res.status(400).json({ success: false, msg: "User not found" })
 
     const cartData = user.cartData || {}
-    cartData[itemId] = (cartData[itemId] || 0) + 1
+    cartData[itemId] = (cartData[itemId] || 0) + quantity
     await userModel.findByIdAndUpdate(userId, { cartData })
     return res.status(200).json({ success: true,cartData, msg: "Added to cart" })
   } catch (err) {
