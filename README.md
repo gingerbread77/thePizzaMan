@@ -8,16 +8,21 @@ The pizza man is a full-stack food ordering platform where users can browse menu
 - Add products to cart
 - Place Order
 - Track order status
-- Order Management for admin
+- Order Management (admin)
+- Product Management (admin)
+- Payment gateway integration
 
 # Tech Stack
-[React](https://react.dev)
-[Node.js](https://nodejs.org/en)
-[Express.js](https://expressjs.com)
-[MongoDB](https://www.mongodb.com)
-[stripe](https://stripe.com/nz)
-[jwt-authentication](https://jwt.io/introduction)
-[multer](https://www.npmjs.com/package/multer)
+- [React](https://react.dev)
+- [Node.js](https://nodejs.org/en)
+- [Express.js](https://expressjs.com)
+- [MongoDB](https://www.mongodb.com)
+- [stripe](https://stripe.com/nz)
+- [jwt-authentication](https://jwt.io/introduction)
+- [multer](https://www.npmjs.com/package/multer)
 
 
 # Demo
+https://thepizzaman-frontend.onrender.com
+[Watch the demo](https://www.youtube.com/watch?v=oXnzSaMYtTg)
+

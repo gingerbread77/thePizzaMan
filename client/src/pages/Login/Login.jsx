@@ -123,6 +123,7 @@ const Login = () => {
           <span onClick={() => {
             toggleStatus();
             clearFormData();
+            setError(null);
           }}>
             {page === 'login' ? 'Sign up' : 'Login'}
           </span>
