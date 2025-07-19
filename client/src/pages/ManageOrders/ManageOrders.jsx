@@ -14,7 +14,6 @@ const ManageOrders = () => {
   }, []);
 
   const fetchOrders = async () => {
-    console.log('fetchOrders called');
     try {
       const res = await axios.get(`${baseUrl}/api/orders/admin/`);
       if (res.data.success) {

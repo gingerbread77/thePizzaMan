@@ -68,15 +68,21 @@ const Login = () => {
           login({
             token: res.data.token,
             email: res.data.user.email,
-            userId:res.data.user._id
+            userId: res.data.user._id
           });
           setError('');
           clearFormData();
           navigate('/');
+        } else {
+          setError(res.data.msg)
         }
       }
     } catch (err) {
-      console.error(err);
+      if (err.response && err.response.data && err.response.data.msg) {
+        setError(err.response.data.msg);
+      } else {
+        setError('Server error, please try again later');
+      }
     }
   }
 

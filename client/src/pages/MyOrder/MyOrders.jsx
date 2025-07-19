@@ -5,7 +5,7 @@ import { baseUrl } from '../../config';
 import axios from 'axios';
 
 const MyOrders = () => {
-  const { user } = useContext(AuthContext);
+  const { user, token } = useContext(AuthContext);
   const userId = user?._id;
 
   const [orders, setOrders] = useState([]);
@@ -16,8 +16,9 @@ const MyOrders = () => {
   const getMyOrders = async () => {
     try {
       const res = await axios.get(`${baseUrl}/api/orders/`, {
-        params: { userId }
-      })
+        params: { userId },
+        headers: { Authorization: `Bearer ${token}` },
+      });
       if (res.data.success) {
         setOrders(res.data.orders);
       } else {
@@ -31,10 +32,22 @@ const MyOrders = () => {
   }
 
   useEffect(() => {
-    if (userId) {
+    if (token && userId) { 
       getMyOrders();
+    } else {
+      setOrders([]);
+      setLoading(false);
     }
-  }, [userId]);
+  }, [token, userId]);
+
+  if (!token) {
+    return (
+      <div className="my-orders">
+        <h2>My Orders</h2>
+        <p>Please login to view your orders.</p>
+      </div>
+    );
+  }
 
   const totalPages = Math.ceil(orders.length / ordersPerPage);
   const startIdx = (currentPage - 1) * ordersPerPage;
@@ -94,7 +107,6 @@ const MyOrders = () => {
         </>
       )}
     </div>
-
   );
 };
 

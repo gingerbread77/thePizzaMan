@@ -3,6 +3,7 @@ import './UploadForm.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { CartContext } from '../../context/CartContext';
+import { baseUrl } from '../../config';
 
 const UploadForm = ({ closeForm, editingProduct }) => {
   const { fetchFoodList } = useContext(CartContext);
@@ -24,7 +25,7 @@ const UploadForm = ({ closeForm, editingProduct }) => {
         category: editingProduct.category || 'pizza',
         description: editingProduct.description || '',
         image: null,
-        imagePreview: editingProduct.image ? `http://localhost:8000${editingProduct.image}` : null,
+        imagePreview: editingProduct.image ? `${baseUrl}${editingProduct.image}` : null,
       });
     } else {
       setForm({
@@ -78,9 +79,9 @@ const UploadForm = ({ closeForm, editingProduct }) => {
     try {
   let res;
   if (isEdit) {
-    res = await axios.put(`http://localhost:8000/api/foods/${editingProduct._id}`, formData);
+    res = await axios.put(`${baseUrl}/api/foods/${editingProduct._id}`, formData);
   } else {
-    res = await axios.post('http://localhost:8000/api/foods/upload', formData);
+    res = await axios.post(`${baseUrl}/api/foods/upload`, formData);
   }
 
   if (res && (res.status === 200 || res.status === 201)) {

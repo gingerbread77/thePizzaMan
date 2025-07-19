@@ -57,7 +57,7 @@ useEffect(() => {
           <li><NavLink to="/" onClick={() => setShowMenuDropDown(false)}>Home</NavLink></li>
           {role === 'admin' ?
             <><li><NavLink to="/admin/products" onClick={() => setShowMenuDropDown(false)}>Products</NavLink></li>
-              <li><NavLink to="/admin/orders" onClick={() => setMenuOpen(false)}>Orders</NavLink></li></> :
+              <li><NavLink to="/admin/orders" onClick={() => setShowMenuDropDown(false)}>Orders</NavLink></li></> :
             <>
               <li><NavLink to="/menu" onClick={() => setShowMenuDropDown(false)}>Menu</NavLink></li>
               <li><NavLink to="/my-orders" onClick={() => setShowMenuDropDown(false)}>My Orders</NavLink></li>
