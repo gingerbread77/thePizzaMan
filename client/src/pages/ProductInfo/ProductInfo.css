@@ -1,0 +1,140 @@
+.product-info {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  background-color: #fff;
+}
+
+.product-container {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  max-width: 900px;
+  width: 100%;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  padding: 30px;
+  background-color: #fafafa;
+}
+
+.product-img {
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+}
+
+.info-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.info-details h2 {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.info-details p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.info-details h3 {
+  font-size: 1.8rem;
+  color: orange;
+  margin-bottom: 20px;
+}
+
+.info-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.info-actions button {
+  background-color: orange;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.info-actions button:hover {
+  background-color: rgb(245, 180, 60);
+}
+
+.info-actions span {
+  font-size: 1.2rem;
+  width: 40px;
+  text-align: center;
+  font-weight: 600;
+  color: #333;
+}
+
+.add-cart-btn {
+  margin-top: 30px;
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 14px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.2rem;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.add-cart-btn:hover {
+  background-color: rgba(255, 165, 0, 0.8);
+}
+
+@media (max-width: 768px) {
+  .product-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .product-img {
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+  }
+
+  .info-details h2 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .info-details p {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .info-details h3 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .info-actions {
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .add-cart-btn {
+    font-size: 1rem;
+    padding: 12px 0;
+  }
+}
+
