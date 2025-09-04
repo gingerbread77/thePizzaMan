@@ -1,4 +1,4 @@
-const foodModel = require('../models/FoodModel')
+const foodModel = require('../models/foodModel')
 const fs = require('fs')
 const path = require('path')
 
