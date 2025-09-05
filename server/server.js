@@ -16,11 +16,12 @@ const PORT = process.env.PORT || 8000
 connectDB();
 
 // enable cross-origin resource sharing from renders
-app.use(cors({
-  origin: "https://thepizzaman-frontend.onrender.com",
-  allowedHeaders: ["Content-Type"],
-  credentials: true,
-}));
+app.use(cors())
+// app.use(cors({
+//   origin: "https://thepizzaman-frontend.onrender.com",
+//   allowedHeaders: ["Content-Type"],
+//   credentials: true,
+// }));
 
 // Parse JSON request bodies into req.body
 app.use(express.json())

@@ -24,7 +24,7 @@ const Menu = () => {
       <div className="menu-list">
         {foodList.filter(food => category === 'All' || food.category ===  category).map(food=>(
           <div key={food._id} className="product-card">
-            <Link to={`/menu/${food._id}`}><img className="food-img" src={`${baseUrl}${food.image}`} alt={food.title} /></Link>
+            <Link to={`/menu/${food._id}`}><img className="food-img" src={`${baseUrl}${food.image}`} alt={food.title} loading="lazy"/></Link>
             <p>{food.name}</p>
             <p>${food.price}</p>
           </div>

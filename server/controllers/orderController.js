@@ -3,7 +3,8 @@ const userModel = require('../models/userModel')
 const Stripe = require('stripe')
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
-const frontendUrl = 'https://thepizzaman-frontend.onrender.com'
+// const frontendUrl = 'https://thepizzaman-frontend.onrender.com'
+const frontendUrl = 'http://localhost:5173'
 
 const getMyOrders = async (req, res) => {
   const { userId } = req.query

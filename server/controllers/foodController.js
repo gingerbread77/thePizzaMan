@@ -1,6 +1,6 @@
-const foodModel = require('../models/foodModel')
 const fs = require('fs')
 const path = require('path')
+const foodModel = require('../models/foodModel')
 
 const createFood = async (req,res) => {
   try {
